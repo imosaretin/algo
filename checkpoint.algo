@@ -1,0 +1,41 @@
+ALGORITHM AnalyzeSentence
+    DECLARE sentence AS STRING
+    DECLARE length AS INTEGER
+    DECLARE words AS INTEGER
+    DECLARE vowels AS INTEGER
+    DECLARE vowelsSet AS SET OF CHARACTERS = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}
+
+    // Initialize counters
+    SET length TO 0
+    SET words TO 0
+    SET vowels TO 0
+
+    // Input sentence from user
+    PRINT "Enter a sentence ending with a period: "
+    READ sentence
+
+    // Verify the sentence ends with a period
+    IF sentence[LEN(sentence) - 1] != '.' THEN
+        PRINT "The sentence must end with a period."
+        RETURN
+    END IF
+
+    // Process each character in the sentence
+    FOR EACH char IN sentence DO
+        length = length + 1
+        IF char IN vowelsSet THEN
+            vowels = vowels + 1
+        END IF
+        IF char = ' ' THEN
+            words = words + 1
+        END IF
+    END FOR
+
+    // Adding the last word (ending with the period)
+    words = words + 1 
+
+    // Display results
+    PRINT "Length of the sentence: " + TO_STRING(length) + " characters"
+    PRINT "Number of words: " + TO_STRING(words)
+    PRINT "Number of vowels: " + TO_STRING(vowels)
+END ALGORITHM
